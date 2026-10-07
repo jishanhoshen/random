@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 interface ThemeToggleProps {
   isDark: boolean;
@@ -7,7 +7,7 @@ interface ThemeToggleProps {
 
 export function ThemeToggle({ isDark, onToggle }: ThemeToggleProps) {
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', isDark);
+    document.documentElement.classList.toggle("dark", isDark);
   }, [isDark]);
 
   return (
@@ -17,7 +17,7 @@ export function ThemeToggle({ isDark, onToggle }: ThemeToggleProps) {
       aria-pressed={isDark}
       className="rounded-full border border-line bg-panel px-4 py-2 text-sm font-semibold text-ink hover:border-accent"
     >
-      {isDark ? 'Light mode' : 'Dark mode'}
+      {isDark ? "Light mode" : "Dark mode"}
     </button>
   );
 }

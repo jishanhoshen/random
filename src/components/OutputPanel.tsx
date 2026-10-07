@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 interface OutputPanelProps {
   output: string;
@@ -9,20 +9,26 @@ interface OutputPanelProps {
 }
 
 const btn =
-  'rounded-lg border border-line px-3.5 py-2 text-sm font-semibold text-ink hover:border-accent disabled:cursor-not-allowed disabled:opacity-40';
+  "rounded-lg border border-line px-3.5 py-2 text-sm font-semibold text-ink hover:border-accent disabled:cursor-not-allowed disabled:opacity-40";
 
-export function OutputPanel({ output, onDownload, stringCount, totalChars, generationTime }: OutputPanelProps) {
+export function OutputPanel({
+  output,
+  onDownload,
+  stringCount,
+  totalChars,
+  generationTime,
+}: OutputPanelProps) {
   const [copied, setCopied] = useState(false);
 
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(output);
     } catch {
-      const ta = document.createElement('textarea');
+      const ta = document.createElement("textarea");
       ta.value = output;
       document.body.appendChild(ta);
       ta.select();
-      document.execCommand('copy');
+      document.execCommand("copy");
       document.body.removeChild(ta);
     }
     setCopied(true);
@@ -37,7 +43,7 @@ export function OutputPanel({ output, onDownload, stringCount, totalChars, gener
         <h2 className="text-lg font-bold text-ink">Result</h2>
         <div className="flex gap-2">
           <button type="button" onClick={copy} disabled={!hasOutput} className={btn}>
-            <span aria-live="polite">{copied ? 'Copied' : 'Copy'}</span>
+            <span aria-live="polite">{copied ? "Copied" : "Copy"}</span>
           </button>
           <button type="button" onClick={onDownload} disabled={!hasOutput} className={btn}>
             Download .txt
@@ -56,14 +62,16 @@ export function OutputPanel({ output, onDownload, stringCount, totalChars, gener
             className="min-h-72 w-full flex-1 resize-y rounded-xl border border-line bg-paper p-4 font-mono text-sm leading-relaxed text-ink"
           />
           <p className="mt-3 text-sm text-muted">
-            {stringCount.toLocaleString()} strings, {totalChars.toLocaleString()} characters, generated in{' '}
+            {stringCount.toLocaleString()} {stringCount === 1 ? "result" : "results"},{" "}
+            {totalChars.toLocaleString()} characters, generated in{" "}
             {Math.max(1, Math.round(generationTime))} ms
           </p>
         </>
       ) : (
         <div className="flex flex-1 items-center justify-center rounded-xl border border-dashed border-line p-8 text-center">
           <p className="max-w-xs text-muted">
-            Pick your options and press <span className="font-semibold text-ink">Generate strings</span>. Results appear here, ready to copy.
+            Choose a type and press <span className="font-semibold text-ink">Generate</span>. Your
+            password appears here, ready to copy.
           </p>
         </div>
       )}

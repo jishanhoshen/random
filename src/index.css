@@ -49,4 +49,6 @@ body {
   outline-offset: 2px;
 }
 
-input[type="range"] { accent-color: var(--accent); }
+input[type="range"] {
+  accent-color: var(--accent);
+}

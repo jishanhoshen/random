@@ -4,7 +4,7 @@ A modern, privacy-focused random string generator web tool built with React, Typ
 
 ## Features
 
-- **Flexible Generation**: Generate 1 to 10,000 strings, each 1 to 64 characters long
+- **Flexible Generation**: Generate 1 to 10,000 strings, each 1 to 100 characters long
 - **Character Options**: Include letters (uppercase/lowercase/both), numbers, and special characters
 - **Human Readability Mode**: Omit visually similar characters (1, l, I, i, 0, O, o)
 - **Multiple Output Formats**: Line breaks, comma-separated, or CSV/Array style with optional array wrapper
@@ -119,7 +119,7 @@ These can be easily imported and used in non-React projects.
 
 ### Performance
 
-For large generation jobs (e.g., 10,000 strings × 64 characters), the UI uses `setTimeout` to defer generation, keeping the interface responsive during generation.
+For large generation jobs (e.g., 10,000 strings × 100 characters), the UI uses `setTimeout` to defer generation, keeping the interface responsive during generation.
 
 ### Accessibility
 

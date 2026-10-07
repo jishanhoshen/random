@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
-import { useStringGenerator } from './hooks/useStringGenerator';
-import { useLocalStorage } from './hooks/useLocalStorage';
-import { ThemeToggle } from './components/ThemeToggle';
-import { GeneratorForm } from './components/GeneratorForm';
-import { OutputPanel } from './components/OutputPanel';
+import { useEffect } from "react";
+import { useStringGenerator } from "./hooks/useStringGenerator";
+import { useLocalStorage } from "./hooks/useLocalStorage";
+import { ThemeToggle } from "./components/ThemeToggle";
+import { GeneratorForm } from "./components/GeneratorForm";
+import { OutputPanel } from "./components/OutputPanel";
 
 function App() {
-  const [isDark, setIsDark] = useLocalStorage('theme', false);
+  const [isDark, setIsDark] = useLocalStorage("theme", false);
   const g = useStringGenerator();
   const { outputFormat, wrapArray, reformat } = g;
 
@@ -15,10 +15,10 @@ function App() {
   }, [outputFormat, wrapArray, reformat]);
 
   const handleDownload = () => {
-    const url = URL.createObjectURL(new Blob([g.output], { type: 'text/plain' }));
-    const a = document.createElement('a');
+    const url = URL.createObjectURL(new Blob([g.output], { type: "text/plain" }));
+    const a = document.createElement("a");
     a.href = url;
-    a.download = 'random-strings.txt';
+    a.download = "random-strings.txt";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -31,34 +31,17 @@ function App() {
     <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
       <header className="mb-8 flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl">Random string generator</h1>
+          <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl">Password generator</h1>
           <p className="mt-2 max-w-xl text-muted">
-            Make tokens, test data and IDs in your browser. Nothing is sent to a server.
+            Make strong passwords, PINs and passphrases in your browser. Nothing is sent to a server
+            and nothing is saved.
           </p>
         </div>
         <ThemeToggle isDark={isDark} onToggle={() => setIsDark(!isDark)} />
       </header>
 
       <main className="grid items-start gap-6 lg:grid-cols-[26rem_1fr]">
-        <GeneratorForm
-          count={g.count}
-          onCountChange={g.setCount}
-          length={g.length}
-          onLengthChange={g.setLength}
-          charsetOptions={g.charsetOptions}
-          onCharsetOptionsChange={g.setCharsetOptions}
-          readable={g.readable}
-          onReadableChange={g.setReadable}
-          outputFormat={g.outputFormat}
-          onOutputFormatChange={g.setOutputFormat}
-          wrapArray={g.wrapArray}
-          onWrapArrayChange={g.setWrapArray}
-          onGenerate={g.generate}
-          onClear={g.clear}
-          isGenerating={g.isGenerating}
-          hasSelectedCharset={g.hasSelectedCharset}
-          error={g.error}
-        />
+        <GeneratorForm g={g} />
         <div className="lg:sticky lg:top-6">
           <OutputPanel
             output={g.output}
@@ -71,14 +54,21 @@ function App() {
       </main>
 
       <section className="mt-12 max-w-2xl text-muted">
-        <h2 className="mb-3 text-xl font-bold text-ink">How it works</h2>
+        <h2 className="mb-3 text-xl font-bold text-ink">Which type should I pick?</h2>
         <p className="mb-3">
-          Set how many strings you need and how long each one is, choose the character types, then press Generate. Copy
-          the result or download it as a text file.
+          Use <span className="font-semibold text-ink">Strong</span> for email, banking and anything
+          you can recover from only with great effort. Use{" "}
+          <span className="font-semibold text-ink">Standard</span> when a site rejects symbols. A{" "}
+          <span className="font-semibold text-ink">passphrase</span> suits passwords you must type
+          by hand, like a device login or a password manager&apos;s master password. A{" "}
+          <span className="font-semibold text-ink">PIN</span> is only for places that lock you out
+          after a few wrong guesses.
         </p>
         <p>
-          Strings are built with your browser&apos;s cryptographically secure random number generator, so they are
-          suitable for API keys and tokens. Up to 10,000 strings of 64 characters each.
+          Everything is generated in your browser with its secure random number generator. Passwords
+          are never sent anywhere or stored. Only your settings are remembered on this device. The
+          strength figure is the amount of randomness in the password, not a promise about how long
+          it would take to crack.
         </p>
       </section>
     </div>
