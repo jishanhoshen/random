@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --color-paper: var(--paper);
+  --color-panel: var(--panel);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-num: var(--num);
+  --color-sym: var(--sym);
+}
+
+:root {
+  --paper: #eef1f5;
+  --panel: #ffffff;
+  --ink: #1b2333;
+  --muted: #5b6578;
+  --line: #d5dbe5;
+  --accent: #2f54eb;
+  --accent-ink: #ffffff;
+  --num: #2f54eb;
+  --sym: #b86b00;
+}
+.dark {
+  --paper: #12161f;
+  --panel: #1a2030;
+  --ink: #e8ecf4;
+  --muted: #93a0b8;
+  --line: #2b3448;
+  --accent: #6c8cff;
+  --accent-ink: #0d1220;
+  --num: #8aa4ff;
+  --sym: #ffb84d;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+input[type="range"] { accent-color: var(--accent); }
